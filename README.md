@@ -4,10 +4,7 @@
 
 A self-hosted multi-site control panel for Ubuntu and Debian. Provision PHP / Node.js / static sites under  
 their own Linux user, deploy from git, manage databases, run cron jobs and long-running workers, get a      
-browser shell — all from a single Laravel-driven web UI.                                                    
-                                                                                                                
-    Built for the case where you want to host a handful of sites on a VPS without gluing together Plesk / cPanel
-    / docker-compose / random shell scripts. 
+browser shell — all from a single Laravel-driven web UI.
 
 <h3 align="center">self-hosted multi-site control panel</h3>
 
