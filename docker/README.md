@@ -1,6 +1,6 @@
 # Atrium systemd-base Docker image
 
-A minimal Ubuntu 24.04 image with **systemd running as PID 1**, designed for running the [Atrium](../ATRIUM.md) bootstrap installer inside a container.
+A minimal Ubuntu 24.04 image with **systemd running as PID 1**, designed for running the [Atrium](https://github.com/yourjhay/atrium) bootstrap installer inside a container.
 
 The Atrium installer calls `systemctl enable/restart` for panel-fpm, mariadb, apache2, php-fpm, etc. Vanilla `ubuntu` images don't have systemd as PID 1, so those calls fail with:
 
