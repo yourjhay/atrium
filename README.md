@@ -413,6 +413,14 @@ The bootstrap selects the right `cloudflared` apt suite per distro, following [C
 
 ---
 
+## Source code
+
+Atrium is source-available. The application repo lives on a self-hosted soft-serve git server behind the same Cloudflare Tunnel the installer uses, so you can clone or browse it from anywhere with `cloudflared` installed.
+
+See **[SOURCE.md](./SOURCE.md)** for the full walkthrough — installing `cloudflared` on macOS / Linux / Windows, the SSH `ProxyCommand` for the read-only TUI, and a `git clone` one-liner (plus a permanent `~/.ssh/config` snippet for ongoing work).
+
+---
+
 <div align="center">
 
 **Made with care.** [Report an issue](https://github.com/yourjhay/atrium/issues/new) · [License](./LICENSE)
