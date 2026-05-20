@@ -1,17 +1,6 @@
-<div align="center">
-
-```
-              .--.            .--.           .-.
-          .-(    ).      .-(    )-.      .-(    ).
-         (___.__)__)    (___.__)___)    (___.____)
-
-      █████╗ ████████╗██████╗ ██╗██╗   ██╗███╗   ███╗
-     ██╔══██╗╚══██╔══╝██╔══██╗██║██║   ██║████╗ ████║
-     ███████║   ██║   ██████╔╝██║██║   ██║██╔████╔██║
-     ██╔══██║   ██║   ██╔══██╗██║██║   ██║██║╚██╔╝██║
-     ██║  ██║   ██║   ██║  ██║██║╚██████╔╝██║ ╚═╝ ██║
-     ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝     ╚═╝
-```
+<p align="center">
+  <img src="./banner.png" alt="ATRIUM" width="640">
+</p>
 
 A self-hosted multi-site control panel for Ubuntu and Debian. Provision PHP / Node.js / static sites under  
 their own Linux user, deploy from git, manage databases, run cron jobs and long-running workers, get a      
@@ -20,14 +9,14 @@ browser shell — all from a single Laravel-driven web UI.
     Built for the case where you want to host a handful of sites on a VPS without gluing together Plesk / cPanel
     / docker-compose / random shell scripts. 
 
-### self-hosted multi-site control panel
+<h3 align="center">self-hosted multi-site control panel</h3>
 
-![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04%20%7C%2024.04-E95420?logo=ubuntu&logoColor=white)
-![Debian](https://img.shields.io/badge/Debian-12%20%7C%2013-A81D33?logo=debian&logoColor=white)
-![Architecture](https://img.shields.io/badge/arch-x86__64%20%7C%20arm64-informational)
-![Install](https://img.shields.io/badge/install-one_command-success)
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/Ubuntu-22.04%20%7C%2024.04-E95420?logo=ubuntu&logoColor=white" alt="Ubuntu">
+  <img src="https://img.shields.io/badge/Debian-12%20%7C%2013-A81D33?logo=debian&logoColor=white" alt="Debian">
+  <img src="https://img.shields.io/badge/arch-x86__64%20%7C%20arm64-informational" alt="Architecture">
+  <img src="https://img.shields.io/badge/install-one_command-success" alt="Install">
+</p>
 
 ---
 
