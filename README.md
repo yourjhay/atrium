@@ -175,14 +175,6 @@ docker run -d \
 ```
 </details>
 
-**Access from your host browser** — add to your host's `/etc/hosts`:
-
-```bash
-echo "127.0.0.1 atrium.local" | sudo tee -a /etc/hosts
-```
-
-Then open <http://atrium.local>.
-
 **Teardown:**
 
 ```bash
@@ -254,6 +246,33 @@ Add to your host's `/etc/hosts`:
 
 ```bash
 multipass delete atrium && multipass purge
+```
+
+---
+
+## Accessing the panel from your host browser
+
+Add the panel hostname to your host machine's `/etc/hosts` so the browser can resolve it:
+
+```bash
+echo "127.0.0.1 atrium.local" | sudo tee -a /etc/hosts
+```
+
+Then open <http://atrium.local>.
+
+> [!NOTE]
+> For VM installs (Method 3), use the VM's IP instead of `127.0.0.1` — Multipass example above shows how to find it. OrbStack auto-registers `atrium.orb.local`, so no `/etc/hosts` edit is needed for that path.
+
+**Every site you later create in Atrium needs the same entry.** For example, after adding `site1.local` from the panel UI:
+
+```bash
+echo "127.0.0.1 site1.local" | sudo tee -a /etc/hosts
+```
+
+Or combine them on one line:
+
+```bash
+echo "127.0.0.1 atrium.local site1.local site2.local" | sudo tee -a /etc/hosts
 ```
 
 ---
