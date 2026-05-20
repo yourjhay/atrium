@@ -415,6 +415,6 @@ The bootstrap selects the right `cloudflared` apt suite per distro, following [C
 
 <div align="center">
 
-**Made with care.** [Report an issue](#) · [Contributing](#) · [License](#)
+**Made with care.** [Report an issue](https://github.com/yourjhay/atrium/issues/new) · [License](./LICENSE)
 
 </div>
