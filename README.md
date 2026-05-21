@@ -290,14 +290,58 @@ When the bootstrap finishes, you'll see a recap like this:
 
 ### The `atrium` CLI
 
+A control wrapper installed to `/usr/local/bin/atrium`. Always run with `sudo`.
+
+**General**
+
 | Command | What it does |
 |---|---|
 | `sudo atrium update` | `git pull --ff-only` (via cloudflared) then `./update.sh` |
-| `sudo atrium status` | Show current commit + working tree |
-| `sudo atrium help` | Print usage |
+| `sudo atrium status` | Source path, last commit, working tree, service status |
+| `sudo atrium help` | Full usage |
+
+**Services**
+
+| Command | What it does |
+|---|---|
+| `sudo atrium restart [target]` | Restart `fpm` \| `queue` \| `apache` \| `all` (default) |
+| `sudo atrium logs <target>` | Tail logs — `queue` \| `fpm` \| `scheduler` \| `apache` \| `laravel` \| `php-fpm` |
+
+**Queue**
+
+| Command | What it does |
+|---|---|
+| `sudo atrium queue restart` | Graceful queue worker restart (finishes current job) |
+| `sudo atrium queue failed` | List failed jobs |
+| `sudo atrium queue retry [id\|all]` | Retry failed jobs (default: `all`) |
+| `sudo atrium queue monitor [q,…]` | Show pending counts (default: `default,high,low`) |
+
+**Admin**
+
+| Command | What it does |
+|---|---|
+| `sudo atrium password <email>` | Reset / create an admin password. Flags: `--password=…` `--name='Display Name'` |
+
+**Firewall**
+
+| Command | What it does |
+|---|---|
+| `sudo atrium firewall show` | List the panel-managed nftables table |
+| `sudo atrium firewall install` | Provision firewall (default-deny inbound + SSH/80/443) |
+| `sudo atrium firewall refresh` | Reapply rules to an existing panel-managed table |
+| `sudo atrium firewall remove` | Delete the table (stops `update.sh` from re-applying) |
+
+**Escape hatch**
+
+| Command | What it does |
+|---|---|
+| `sudo atrium artisan <args…>` | Run any artisan command as the `panel` user |
 
 > [!TIP]
-> The wrapper lives at `/usr/local/bin/atrium`; its config is `/etc/atrium/source.conf`.
+> The wrapper lives at `/usr/local/bin/atrium`; its config is `/etc/atrium/source.conf` (records `SOURCE_DIR`, `REPO_REMOTE`, `PANEL_FPM_PHP`).
+
+> [!NOTE]
+> Firewall is enabled by default on fresh installs. Opt out by setting `PANEL_NO_FIREWALL=1` when running `install.sh`, or run `sudo atrium firewall remove` after install. `sudo atrium update` only refreshes existing tables — opt-out propagates across upgrades.
 
 ---
 
