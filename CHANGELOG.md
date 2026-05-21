@@ -14,6 +14,33 @@ _Nothing here yet._
 
 ---
 
+## [1.2.0] — 2026-05-22
+
+### Added
+- **Server dashboard** at `/dashboard` — new live view showing host CPU, memory,
+  and disk usage with KPI tiles and SVG line charts. Auto-polls fresh data via
+  a vanilla-JS poller (no framework dependency). Replaces `/sites` as the
+  default landing page for logged-in admins.
+- **Per-minute metrics sampling** — new `panel-stats` privileged script reads
+  `/proc` and `df` and emits JSON; the new `stats:sample` artisan command
+  persists rows to the `server_metrics` table on a per-minute schedule.
+- **Dashboard / Sites navigation** added to the top bar so the dashboard and
+  the existing site list are both one click away from anywhere in the panel.
+- `SERVER_METRICS.md` documentation covering the dashboard architecture, the
+  sampler, and how to extend the metric set.
+
+### Changed
+- The root URL `/` now redirects logged-in users to `/dashboard` (previously
+  `/sites`). The old route still works directly; only the redirect target
+  changed.
+
+### Fixed
+- Dashboard SVG chart no longer emits a malformed `<path>` when a metric
+  series has fewer than 2 samples — important on fresh installs before the
+  first sampler tick lands.
+
+---
+
 ## [1.1.3] — 2026-05-22
 
 ### Added
@@ -122,9 +149,3 @@ Initial release.
   Docker container, virtual machine (OrbStack / Multipass).
 - **Non-interactive mode** via `ATRIUM_NONINTERACTIVE=1` for fully-automated installs
   with sensible defaults.
-
-[Unreleased]: https://github.com/yourjhay/atrium/compare/v1.1.3...HEAD
-[1.1.3]: https://github.com/yourjhay/atrium/releases/tag/v1.1.3
-[1.1.0]: https://github.com/yourjhay/atrium/releases/tag/v1.1.0
-[1.0.1]: https://github.com/yourjhay/atrium/releases/tag/v1.0.1
-[1.0.0]: https://github.com/yourjhay/atrium/releases/tag/v1.0.0
