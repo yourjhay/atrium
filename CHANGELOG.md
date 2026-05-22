@@ -14,6 +14,37 @@ _Nothing here yet._
 
 ---
 
+## [1.3.0] — 2026-05-23
+
+### Added
+- **External SSH access per site.** Each site can now expose SSH login as
+  its Linux user (`site_<name>`), locked to a per-site chroot jail at
+  `/srv/jails/<u>/`. Pubkey-only authentication, multiple labeled keys
+  managed via the new SSH Access tab. SFTP/SCP work alongside the shell.
+  The browser terminal also runs inside the jail when SSH is enabled,
+  giving consistent isolation across both access paths.
+
+### Changed
+- The "Terminal" tab is now "SSH Access". It contains the existing
+  browser terminal on top and a new External SSH section below (toggle,
+  copy-paste connection command, authorized-keys list, add-key form).
+- Site delete now tears down any active SSH access and its chroot jail
+  as part of the regular delete flow.
+
+### Security
+- Site users default to `/usr/sbin/nologin`. Enabling SSH temporarily
+  flips the shell to `/bin/bash` and adds the user to a strictly-scoped
+  `Match User` block in sshd config (chroot, no port-forwarding, no
+  agent-forwarding, no TCP tunnel). Disabling restores nologin and
+  truncates the user's `authorized_keys` so the next login attempt is
+  refused before MOTD — no "account not available" theater, no leaked
+  session.
+- sshd config is always validated with `sshd -t` before reload, with
+  automatic rollback to the previous drop-in on failure. A bad
+  template cannot lock the host admin out.
+
+---
+
 ## [1.2.1] — 2026-05-22
 
 ### Changed
