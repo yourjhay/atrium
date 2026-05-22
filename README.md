@@ -428,6 +428,14 @@ sudo systemctl daemon-reload
 
 ### Environment variables
 
+Two layers consume env vars: the `ATRIUM.sh` bootstrap (banner + prompts) and the underlying `install.sh` (panel build). Vars set on the `sudo` line propagate to both:
+
+```bash
+sudo PANEL_FPM_PHP=8.4 PANEL_UPLOAD_MAX_FILESIZE=2G bash ATRIUM.sh
+```
+
+**Bootstrap (ATRIUM.sh)**
+
 | Var | Default | Purpose |
 |---|---|---|
 | `ATRIUM_NONINTERACTIVE` | `0` | Skip banner menu + prompts; all other vars become optional |
@@ -435,7 +443,21 @@ sudo systemctl daemon-reload
 | `ADMIN_EMAIL` | `admin@atrium.local` | Bootstrap admin email |
 | `ADMIN_PASSWORD` | `password` | Bootstrap admin password (min 8 chars if overridden) |
 
-All four are optional in non-interactive mode — set `ATRIUM_NONINTERACTIVE=1` alone for a fully-default install. Override any subset to customize.
+The four above are optional in non-interactive mode — set `ATRIUM_NONINTERACTIVE=1` alone for a fully-default install. Override any subset to customize.
+
+**Install (install.sh) — forwarded from environment**
+
+| Var | Default | Purpose |
+|---|---|---|
+| `PANEL_DIR` | `/var/www/panel` | Target install directory for the Laravel app |
+| `PANEL_FPM_PHP` | `8.3` | PHP version that runs the panel itself (`8.3` or `8.4`) |
+| `PANEL_UPLOAD_MAX_FILESIZE` | `500M` | Max single-file upload in the panel's file manager |
+| `PANEL_POST_MAX_SIZE` | `600M` | Max total POST body; must be ≥ `PANEL_UPLOAD_MAX_FILESIZE` |
+| `PANEL_MAX_FILE_UPLOADS` | `50` | Max files per upload request |
+| `PANEL_NO_FIREWALL` | unset | Set to `1` to skip UFW/firewall configuration (e.g. containers) |
+| `ADMINER_VERSION` | `5.4.2` | Adminer release bundled at `/adminer.php` |
+| `NODE_MAJOR` | `22` | NodeSource major version installed for per-site Node apps |
+| `SKIP_APT` | `0` | Set to `1` to skip apt updates/installs on re-runs |
 
 ### Cloudflare repo suite mapping
 
