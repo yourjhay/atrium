@@ -14,6 +14,20 @@ _Nothing here yet._
 
 ---
 
+## [1.2.1] — 2026-05-22
+
+### Changed
+- Dashboard poll interval simplified. The 10s/30s/60s selector has been
+  removed and the dashboard now refreshes every 30 seconds. Faster polling
+  fetched identical payloads between sampler ticks (metrics are written
+  once per minute), so the choice was redundant.
+- Dashboard health pill thresholds tightened. The pill now flips to
+  "Attention" at **90% CPU** (was 95%), **80% RAM** (was 95%), or
+  **80% disk** (was 95%) so capacity warnings appear before saturation
+  rather than after.
+
+---
+
 ## [1.2.0] — 2026-05-22
 
 ### Added
