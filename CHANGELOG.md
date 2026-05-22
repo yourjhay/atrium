@@ -14,6 +14,34 @@ _Nothing here yet._
 
 ---
 
+## [1.5.2] — 2026-05-23
+
+### Fixed
+- **External SSH access now works on minimal/Docker installs.**
+  Three separate failures combined to break first-time `Enable`
+  on hosts without a fully-configured sshd: (1) `openssh-server`
+  is now installed as part of the base package set (was missing
+  on the bootstrap image and minimal cloud images), (2) `sshd -t`
+  validation calls resolve the binary by absolute path so sudo's
+  reduced PATH doesn't drop `/usr/sbin`, and (3)
+  `/etc/ssh/sshd_config.d/` plus the matching `Include` directive
+  are seeded into the main sshd config when missing, with
+  validation + rollback if the directive itself wouldn't parse.
+  The error UI also now tells the operator the exact apt command
+  when sshd is genuinely absent.
+- **File Manager hide-list expanded.** `.bash_profile`,
+  `.viminfo`, `.my.cnf`, and `.bun` no longer appear in the
+  site-root listing. `.my.cnf` (shipped per-site in 1.5.0)
+  contains the local MySQL password; the others are tool caches
+  that shouldn't be editable from the UI.
+- **Site creation hint is now cross-platform.** The previous copy
+  pointed only at macOS `/etc/hosts`. The updated hint covers
+  pointing an A record at the host for production or editing the
+  hosts file per OS for local-only testing (Linux/macOS path and
+  Windows path both shown).
+
+---
+
 ## [1.5.1] — 2026-05-23
 
 ### Security
