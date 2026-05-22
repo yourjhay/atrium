@@ -14,6 +14,16 @@ _Nothing here yet._
 
 ---
 
+## [1.3.1] — 2026-05-23
+
+### Fixed
+- Copy buttons across the panel (SSH connection string, database
+  password, deploy public key) now work over plain HTTP — not just
+  over HTTPS or localhost. Each button also gives visible "copied" /
+  "copy failed" feedback for 1.5s instead of silently doing nothing.
+
+---
+
 ## [1.3.0] — 2026-05-23
 
 ### Added
