@@ -14,6 +14,46 @@ _Nothing here yet._
 
 ---
 
+## [1.5.1] — 2026-05-23
+
+### Security
+- **Cross-tenant filesystem lock-down.** On shared hosts, any
+  site user could previously list every other tenant's directory
+  name under `/srv/sites/` and walk into a neighbour's home to
+  read files (Laravel `.env`, deploy keys). `/srv/sites/` is now
+  0711 and each site home is 0750. Apache still serves static
+  files via group membership. `update.sh` backfills both perms
+  and the `www-data` group on existing installs and restarts
+  Apache so the running workers see the new groups.
+- **External SSH enable/disable race closed.** Enabling SSH used
+  to flip the user's login shell to bash before rendering the
+  sshd `Match` block; a timed `ssh` race during that window
+  could land an un-jailed host shell. The new order — render the
+  Match block first, then the shell — keeps the user at nologin
+  until the chroot directive is in place. Disable mirrors it
+  (nologin first, then drop the Match block).
+- **Authorized-keys staging hardened.** SSH key-sync used to
+  stage a temp file inside the site user's own `.ssh/` with a
+  predictable PID-derived name; a planted symlink could trick
+  root into overwriting host files. Staging now happens in a
+  root-only directory, and the final write into
+  `~/.ssh/authorized_keys` runs as the site user so kernel
+  permissions — not root — gate it.
+- **Pubkey validation tightened.** The Add Key form now rejects
+  multi-line input and `authorized_keys` option-prefix tokens
+  (`command="..."`, `from="..."`, `environment="..."`, etc.).
+  Previously these would have been written verbatim into the
+  user's `authorized_keys` and honored by sshd, granting hidden
+  behaviours inside the site jail.
+
+### Fixed
+- Creating a site with a PHP version that isn't installed on the
+  host (e.g. `8.5` before it ships) is now rejected up front
+  instead of partially provisioning the site (user, home dir,
+  `.bashrc`) before failing on the missing FPM pool.
+
+---
+
 ## [1.5.0] — 2026-05-23
 
 ### Added
