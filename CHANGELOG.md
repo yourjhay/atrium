@@ -14,6 +14,36 @@ _Nothing here yet._
 
 ---
 
+## [1.5.0] — 2026-05-23
+
+### Added
+- **In-panel Documentation page.** New `/docs` route surfaces curated
+  how-tos (data access, SSH/SFTP, workers & cron, runtime tooling,
+  reference) with a sidebar topic nav, so common questions no longer
+  require leaving the panel.
+- **Runtime tooling guide.** Walks through installing extras like
+  Bun, pnpm, yarn, and Python inside a site jail.
+- **Per-site MySQL client config.** Each site now ships a `.my.cnf`
+  pointing the `mysql` CLI at `127.0.0.1` over TCP, so `mysql` and
+  `mysqldump` work straight from the SSH/terminal session inside the
+  jail without needing the host socket.
+- **Browser terminal lands in the site directory** with a short
+  colored prompt — no `cd /srv/sites/<u>` after every connect.
+
+### Fixed
+- DNS resolution inside chroot jails (browser terminal / external
+  SSH) when `/etc/resolv.conf` is a symlink to a directory outside
+  `/etc` — common on systemd-resolved hosts and OrbStack. The jail
+  now binds the resolver's actual target directory. Re-running jail
+  provisioning also adds this new bind to already-provisioned jails
+  instead of exiting early.
+- Site header title is now readable in light mode (was low-contrast
+  against the page background).
+- File Manager hides `.ssh/` from the site root listing so the
+  per-site authorized-keys directory isn't editable from the UI.
+
+---
+
 ## [1.4.0] — 2026-05-23
 
 ### Changed
