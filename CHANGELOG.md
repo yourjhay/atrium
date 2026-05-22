@@ -14,6 +14,20 @@ _Nothing here yet._
 
 ---
 
+## [1.4.0] — 2026-05-23
+
+### Changed
+- **Navbar redesign.** The topbar is now a floating glass pill that
+  sits over a soft mauve/sapphire aurora wash, matching the rest of
+  the panel's catppuccin theme. The current host shows next to the
+  Atrium banner, the active tab is highlighted with a mauve pill,
+  your email collapses into an avatar+name+email block that links to
+  your profile, and the theme toggle and sign-out are now matching
+  icon buttons. Mobile compresses the user text and host tag away so
+  the row stays tidy on narrow screens.
+
+---
+
 ## [1.3.1] — 2026-05-23
 
 ### Fixed
