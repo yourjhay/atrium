@@ -14,6 +14,32 @@ _Nothing here yet._
 
 ---
 
+## [1.5.4] — 2026-05-23
+
+### Fixed
+- The panel UI is no longer exposed on raw-IP, orbstack, or unknown-host
+  requests. v1.5.3 inadvertently made the panel vhost Apache's catch-all
+  default, so anyone hitting the server's IP got the panel login form.
+  v1.5.4 introduces a separate Atrium-branded "No site is configured at
+  this address" page (served by a new `000-atrium-default.conf` vhost)
+  that absorbs every unmatched `Host` header; the panel now responds
+  only to its configured `PANEL_DOMAIN` (plus aliases). Existing
+  installs migrate to the new layout automatically on next
+  `sudo atrium update` — the previous panel vhost is preserved as
+  `panel-vhost.conf.bak-pre-atrium-default` for manual rollback.
+
+### Changed
+- `install.sh` and `update.sh` now ensure `zip`, `unzip`, `bzip2`, and
+  `xz-utils` are present. Existing installs backfill missing packages
+  on next `sudo atrium update`. Lays groundwork for compress/extract
+  in the File Manager.
+
+### Added
+- FAQ entry clarifying that a site's domain is fixed at creation —
+  points operators at the delete-and-recreate workaround.
+
+---
+
 ## [1.5.3] — 2026-05-23
 
 ### Fixed
