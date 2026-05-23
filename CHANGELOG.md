@@ -14,6 +14,28 @@ _Nothing here yet._
 
 ---
 
+## [1.5.3] — 2026-05-23
+
+### Fixed
+- Apache no longer routes unknown hostnames (raw IP, `*.orb.local`,
+  bogus subdomains) to whichever site sorts alphabetically first. The
+  panel vhost now lives in `conf-enabled/`, which Apache reads before
+  any site config — so the panel is always the catch-all for unmatched
+  `Host` headers regardless of which domains users register.
+
+### Security
+- Jails no longer bind the host's whole `/etc/` directory. Each jail
+  gets a curated allowlist of only the files/dirs a normal shell
+  needs (dynamic linker, `nsswitch.conf`, `hosts`, `ssl`,
+  `ca-certificates`, `pam.d`, the profile chain, etc.) plus a
+  per-jail **filtered** `/etc/passwd` and `/etc/group` that contain
+  only the site user and a few required system accounts. Closes the
+  cross-tenant metadata leak where any tenant with External SSH
+  could read every other site's username, vhost configuration,
+  PHP-FPM pool layout, cron entries, and SSH enable/disable timeline.
+
+---
+
 ## [1.5.2] — 2026-05-23
 
 ### Fixed
