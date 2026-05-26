@@ -14,6 +14,27 @@ _Nothing here yet._
 
 ---
 
+## [1.6.0] — 2026-05-26
+
+### Added
+- **Auto-deploy on new commits** — per-site toggle on the Deploy tab. When
+  enabled, Atrium polls the configured branch via `git ls-remote` every
+  5 minutes and triggers a deploy whenever the remote branch tip advances
+  to a new commit. Manual **Deploy now** continues to work and is the way
+  to retry a failing build on the same commit (auto-deploys don't retry
+  the same SHA — only a new push fires another auto run). A status line
+  on the Deploy tab shows last poll time + last seen commit, and turns
+  red if polling stalls (>15 min since the last successful check).
+- **Trigger column** in the deployment history table distinguishes
+  auto-fired deploys (clock icon) from manual ones (person icon).
+
+### Fixed
+- `panel-site-poll` now runs `git ls-remote` from the site's own home
+  directory via `git -C`, avoiding "Permission denied" failures when the
+  scheduler's working directory isn't readable by the site user.
+
+---
+
 ## [1.5.4] — 2026-05-23
 
 ### Fixed
