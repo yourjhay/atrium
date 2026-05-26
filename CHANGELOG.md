@@ -14,6 +14,27 @@ _Nothing here yet._
 
 ---
 
+## [1.6.2] — 2026-05-26
+
+### Fixed
+- `panel-site-deploy` no longer silently reports success when a git command
+  fails during the redeploy path. Previously, a failed `git reset --hard
+  origin/<branch>` was hidden by bash's `set -e` being disabled inside the
+  enclosing `if !` conditional, and the deploy row showed status=success
+  with the previous branch's commit. The block now runs in a subshell with
+  `set -e`, so any failure propagates.
+- Switching a site to a branch the local clone didn't originally track (e.g.
+  changing `main` → `preview` in the Deploy tab) now correctly fetches and
+  resets to the new branch's tip. The first deploy uses
+  `git clone --branch X --depth 1`, which implies `--single-branch`; the
+  fetch refspec only covered branch X, so a later `git fetch origin Y` would
+  not create `refs/remotes/origin/Y`, leaving `git reset --hard origin/Y`
+  unable to resolve the ref. `panel-site-deploy` now fetches with an
+  explicit refspec `+refs/heads/B:refs/remotes/origin/B` so the
+  remote-tracking ref always lands.
+
+---
+
 ## [1.6.1] — 2026-05-26
 
 ### Changed
