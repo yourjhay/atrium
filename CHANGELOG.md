@@ -14,6 +14,17 @@ _Nothing here yet._
 
 ---
 
+## [1.6.1] — 2026-05-26
+
+### Changed
+- `sudo atrium check` now prompts to update when a newer tag is available
+  on the remote (interactive sessions only). Reply `y` to run the same
+  update path as `sudo atrium update`; anything else keeps the suggestion
+  visible without acting. Cron and non-TTY contexts are unchanged — the
+  daily `--quiet --refresh` tick still runs silently.
+
+---
+
 ## [1.6.0] — 2026-05-26
 
 ### Added
