@@ -14,6 +14,26 @@ _Nothing here yet._
 
 ---
 
+## [1.6.3] — 2026-05-29
+
+### Fixed
+- The panel no longer returns **503 Service Unavailable after a reboot**.
+  `/run` is a tmpfs that the OS wipes on every restart, and nothing
+  recreated `/run/php` before `panel-fpm` started, so its listen socket
+  failed to bind and Apache had no backend. The service now recreates the
+  socket directory on each start.
+- File Manager: long filenames no longer squeeze the other columns — the
+  Name column is now width-capped.
+- Site shells (jail): per-version PHP CLI now loads its dynamic extensions
+  correctly.
+- Database import: the underlying MariaDB `ERROR` is now surfaced when an
+  import fails, instead of a generic failure.
+
+### Changed
+- File Manager: the per-file Download text link is now a download icon.
+
+---
+
 ## [1.6.2] — 2026-05-26
 
 ### Fixed
