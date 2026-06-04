@@ -14,6 +14,20 @@ _Nothing here yet._
 
 ---
 
+## [1.7.0] — 2026-06-04
+
+### Added
+- **Per-site maintenance mode.** Each site's edit page has a new
+  Maintenance section to temporarily take the site down — visitors get a
+  branded maintenance page (HTTP 503) with an optional custom message
+  instead of the live site. You can list IP addresses that bypass
+  maintenance, so you can verify a fix before lifting it. Available for
+  sites Atrium serves directly (PHP and static); sites behind a reverse
+  proxy (Node apps, or a site with a per-site proxy) show a note that
+  maintenance mode isn't available for them yet.
+
+---
+
 ## [1.6.3] — 2026-05-29
 
 ### Fixed
